@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1914-1945 : Survivre à la Guerre — Livre dont vous êtes le héros</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Special+Elite&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ÉCRAN TITRE -->
+<div id="screen-title" class="screen active">
+    <div class="title-bg"></div>
+    <div class="title-content">
+        <div class="title-badge">📚 Livre dont vous êtes le héros</div>
+        <h1 class="title-main">1914 — 1945</h1>
+        <h2 class="title-sub">Survivre à la Guerre</h2>
+        <p class="title-desc">Un jeu pédagogique sur les deux guerres mondiales.<br>Vos choix changeront votre destin.</p>
+        <button class="btn btn-primary btn-large" onclick="showScreen('screen-war-choice')">
+            ▶ Commencer l'aventure
+        </button>
+        <p class="title-warning">⚠️ Ce jeu contient des situations de guerre réalistes.<br>Certains passages abordent la mort, la violence et la souffrance.</p>
+    </div>
+</div>
+
+<!-- CHOIX DE LA GUERRE -->
+<div id="screen-war-choice" class="screen">
+    <div class="choice-header">
+        <h2>Choisis ta période</h2>
+        <p>Quelle guerre veux-tu vivre de l'intérieur ?</p>
+    </div>
+    <div class="war-cards">
+        <div class="war-card ww1-card" onclick="selectWar('ww1')">
+            <div class="war-card-year">1914 – 1918</div>
+            <h3>Première Guerre mondiale</h3>
+            <div class="war-card-icons">⚔️ 🪖 💨</div>
+            <ul>
+                <li>Les tranchées de la Somme</li>
+                <li>Les gaz de combat</li>
+                <li>La bataille de Verdun</li>
+                <li>L'armistice de novembre</li>
+            </ul>
+            <span class="war-card-btn">Choisir cette période →</span>
+        </div>
+        <div class="war-card ww2-card" onclick="selectWar('ww2')">
+            <div class="war-card-year">1939 – 1945</div>
+            <h3>Seconde Guerre mondiale</h3>
+            <div class="war-card-icons">💣 🏭 ✊</div>
+            <ul>
+                <li>L'occupation nazie</li>
+                <li>Le bombardement de Dresde</li>
+                <li>La Résistance</li>
+                <li>La libération</li>
+            </ul>
+            <span class="war-card-btn">Choisir cette période →</span>
+        </div>
+    </div>
+    <button class="btn btn-secondary btn-back" onclick="showScreen('screen-title')">← Retour</button>
+</div>
+
+<!-- CHOIX DU PERSONNAGE -->
+<div id="screen-character-choice" class="screen">
+    <div class="choice-header">
+        <h2>Qui es-tu ?</h2>
+        <p>Chaque personnage vivra la guerre différemment.</p>
+    </div>
+    <div id="character-grid" class="character-grid">
+        <!-- Rempli dynamiquement -->
+    </div>
+    <button class="btn btn-secondary btn-back" onclick="showScreen('screen-war-choice')">← Retour</button>
+</div>
+
+<!-- ÉCRAN DE JEU PRINCIPAL -->
+<div id="screen-game" class="screen">
+    <div class="game-header">
+        <div class="game-info">
+            <span id="game-war-label" class="game-tag"></span>
+            <span id="game-character-label" class="game-tag game-tag-char"></span>
+            <span id="game-year-label" class="game-tag game-tag-year"></span>
+        </div>
+        <div class="game-stats">
+            <div class="stat-item">
+                <span class="stat-icon">❤️</span>
+                <div class="stat-bar">
+                    <div id="stat-health" class="stat-fill health-fill" style="width:100%"></div>
+                </div>
+                <span id="stat-health-val" class="stat-val">100</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🧠</span>
+                <div class="stat-bar">
+                    <div id="stat-morale" class="stat-fill morale-fill" style="width:80%"></div>
+                </div>
+                <span id="stat-morale-val" class="stat-val">80</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-content">
+        <div id="game-chapter" class="game-chapter"></div>
+        <div id="game-narrative" class="game-narrative"></div>
+        <div id="game-historical-note" class="historical-note" style="display:none"></div>
+        <div id="game-choices" class="game-choices"></div>
+    </div>
+</div>
+
+<!-- ÉCRAN DE FIN -->
+<div id="screen-end" class="screen">
+    <div id="end-content" class="end-content">
+        <!-- Rempli dynamiquement -->
+    </div>
+</div>
+
+<!-- ÉCRAN RÉSUMÉ PÉDAGOGIQUE -->
+<div id="screen-summary" class="screen">
+    <div class="summary-content">
+        <div class="summary-header">
+            <h2>📚 Ce que tu as appris</h2>
+            <p>Résumé pédagogique de ton aventure</p>
+        </div>
+        <div id="summary-lived" class="summary-section">
+            <h3>🗓️ Ce que ton personnage a vécu</h3>
+            <div id="summary-lived-content"></div>
+        </div>
+        <div id="summary-notions" class="summary-section">
+            <h3>🔑 Les notions clés</h3>
+            <div class="notions-grid" id="notions-grid"></div>
+        </div>
+        <div class="summary-section definition-box">
+            <h3>📖 Définition : La Guerre Totale</h3>
+            <p>La <strong>guerre totale</strong> est un conflit qui mobilise l'ensemble de la société : les soldats au front, mais aussi les civils, les usines, l'économie, et même les esprits (propagande). Toutes les ressources d'un pays sont utilisées pour la guerre. Les deux guerres mondiales sont les exemples historiques de guerres totales : elles ont tué des dizaines de millions de personnes, civils et militaires confondus.</p>
+        </div>
+        <div class="summary-section reperes-box">
+            <h3>📅 Repères chronologiques</h3>
+            <div id="reperes-content"></div>
+        </div>
+        <div class="summary-actions">
+            <button class="btn btn-primary" onclick="restartGame()">🔄 Rejouer</button>
+            <button class="btn btn-secondary" onclick="showScreen('screen-war-choice')">🗺️ Changer de période</button>
+        </div>
+    </div>
+</div>
+
+<!-- OVERLAY MORT -->
+<div id="overlay-death" class="overlay" style="display:none">
+    <div class="overlay-box death-box">
+        <div class="death-icon">💀</div>
+        <h2 id="death-title">Tu n'as pas survécu…</h2>
+        <p id="death-text"></p>
+        <div class="death-historical" id="death-historical"></div>
+        <div class="overlay-actions">
+            <button class="btn btn-secondary" onclick="closeDeathOverlay()">📖 Voir le résumé pédagogique</button>
+            <button class="btn btn-primary" onclick="restartGame()">🔄 Recommencer</button>
+        </div>
+    </div>
+</div>
+
+<script src="game-data-ww1.js"></script>
+<script src="game-data-ww2.js"></script>
+<script src="game-engine.js"></script>
+</body>
+</html>
